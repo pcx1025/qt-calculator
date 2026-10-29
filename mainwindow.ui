@@ -1,0 +1,501 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>360</width>
+    <height>560</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>计算器</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <property name="styleSheet">
+    <string notr="true">QWidget#centralwidget {
+    background-color: #1e1e1e;
+}
+
+/* 显示屏：右对齐、白字、无边框 */
+QLineEdit#display {
+    background-color: #1e1e1e;
+    color: white;
+    border: none;
+    font-size: 32px;
+    font-weight: bold;
+    padding-right: 12px;
+}
+
+/* 数字键：深灰圆角 */
+QPushButton#btnNum0, QPushButton#btnNum1, QPushButton#btnNum2,
+QPushButton#btnNum3, QPushButton#btnNum4, QPushButton#btnNum5,
+QPushButton#btnNum6, QPushButton#btnNum7, QPushButton#btnNum8,
+QPushButton#btnNum9, QPushButton#btnSign, QPushButton#btnDot {
+    background-color: #333333;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 22px;
+    font-weight: bold;
+}
+QPushButton#btnNum0:hover, QPushButton#btnNum1:hover, QPushButton#btnNum2:hover,
+QPushButton#btnNum3:hover, QPushButton#btnNum4:hover, QPushButton#btnNum5:hover,
+QPushButton#btnNum6:hover, QPushButton#btnNum7:hover, QPushButton#btnNum8:hover,
+QPushButton#btnNum9:hover, QPushButton#btnSign:hover, QPushButton#btnDot:hover {
+    background-color: #555555;
+}
+QPushButton#btnNum0:pressed, QPushButton#btnNum1:pressed, QPushButton#btnNum2:pressed,
+QPushButton#btnNum3:pressed, QPushButton#btnNum4:pressed, QPushButton#btnNum5:pressed,
+QPushButton#btnNum6:pressed, QPushButton#btnNum7:pressed, QPushButton#btnNum8:pressed,
+QPushButton#btnNum9:pressed, QPushButton#btnSign:pressed, QPushButton#btnDot:pressed {
+    background-color: #777777;
+}
+
+/* 二元操作符与等号：橙色 */
+QPushButton#btnPlus, QPushButton#btnMinus,
+QPushButton#btnMultiple, QPushButton#btnDivide, QPushButton#btnEqual {
+    background-color: #ff9500;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 24px;
+    font-weight: bold;
+}
+QPushButton#btnPlus:hover, QPushButton#btnMinus:hover,
+QPushButton#btnMultiple:hover, QPushButton#btnDivide:hover, QPushButton#btnEqual:hover {
+    background-color: #ffaa33;
+}
+QPushButton#btnPlus:pressed, QPushButton#btnMinus:pressed,
+QPushButton#btnMultiple:pressed, QPushButton#btnDivide:pressed, QPushButton#btnEqual:pressed {
+    background-color: #cc7700;
+}
+
+/* 一元操作符：浅灰 */
+QPushButton#btnPercentage, QPushButton#btnInverse,
+QPushButton#btnSquare, QPushButton#btnSqrt {
+    background-color: #a5a5a5;
+    color: black;
+    border: none;
+    border-radius: 6px;
+    font-size: 18px;
+    font-weight: bold;
+}
+QPushButton#btnPercentage:hover, QPushButton#btnInverse:hover,
+QPushButton#btnSquare:hover, QPushButton#btnSqrt:hover {
+    background-color: #bbbbbb;
+}
+QPushButton#btnPercentage:pressed, QPushButton#btnInverse:pressed,
+QPushButton#btnSquare:pressed, QPushButton#btnSqrt:pressed {
+    background-color: #888888;
+}
+
+/* 工具键 CE C ⌫：浅灰 */
+QPushButton#btnCE, QPushButton#btnClear, QPushButton#btnDel {
+    background-color: #a5a5a5;
+    color: black;
+    border: none;
+    border-radius: 6px;
+    font-size: 18px;
+    font-weight: bold;
+}
+QPushButton#btnCE:hover, QPushButton#btnClear:hover, QPushButton#btnDel:hover {
+    background-color: #bbbbbb;
+}
+QPushButton#btnCE:pressed, QPushButton#btnClear:pressed, QPushButton#btnDel:pressed {
+    background-color: #888888;
+}</string>
+   </property>
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <property name="spacing">
+     <number>6</number>
+    </property>
+    <property name="leftMargin">
+     <number>10</number>
+    </property>
+    <property name="topMargin">
+     <number>10</number>
+    </property>
+    <property name="rightMargin">
+     <number>10</number>
+    </property>
+    <property name="bottomMargin">
+     <number>10</number>
+    </property>
+    <item>
+     <widget class="QLineEdit" name="display">
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>90</height>
+       </size>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>26</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="readOnly">
+       <bool>true</bool>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+      </property>
+      <property name="text">
+       <string>0</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <layout class="QGridLayout" name="gridLayout">
+      <property name="spacing">
+       <number>6</number>
+      </property>
+      <item row="0" column="0">
+       <widget class="QPushButton" name="btnPercentage">
+        <property name="minimumSize">
+         <size>
+          <width>70</width>
+          <height>60</height>
+         </size>
+        </property>
+        <property name="toolTip">
+         <string>百分比</string>
+        </property>
+        <property name="text">
+         <string>%</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QPushButton" name="btnCE">
+        <property name="minimumSize">
+         <size>
+          <width>70</width>
+          <height>60</height>
+         </size>
+        </property>
+        <property name="toolTip">
+         <string>清除当前输入</string>
+        </property>
+        <property name="text">
+         <string>CE</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="2">
+       <widget class="QPushButton" name="btnClear">
+        <property name="minimumSize">
+         <size>
+          <width>70</width>
+          <height>60</height>
+         </size>
+        </property>
+        <property name="toolTip">
+         <string>全部清除</string>
+        </property>
+        <property name="text">
+         <string>C</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="3">
+       <widget class="QPushButton" name="btnDel">
+        <property name="minimumSize">
+         <size>
+          <width>70</width>
+          <height>60</height>
+         </size>
+        </property>
+        <property name="toolTip">
+         <string>退格</string>
+        </property>
+        <property name="text">
+         <string>⌫</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QPushButton" name="btnInverse">
+        <property name="minimumSize">
+         <size>
+          <width>70</width>
+          <height>60</height>
+         </size>
+        </property>
+        <property name="toolTip">
+         <string>倒数</string>
+        </property>
+        <property name="text">
+         <string>1/x</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QPushButton" name="btnSquare">
+        <property name="minimumSize">
+         <size>
+          <width>70</width>
+          <height>60</height>
+         </size>
+        </property>
+        <property name="toolTip">
+         <string>平方</string>
+        </property>
+        <property name="text">
+         <string>x²</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="2">
+       <widget class="QPushButton" name="btnSqrt">
+        <property name="minimumSize">
+         <size>
+          <width>70</width>
+          <height>60</height>
+         </size>
+        </property>
+        <property name="toolTip">
+         <string>开平方</string>
+        </property>
+        <property name="text">
+         <string>√x</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="3">
+       <widget class="QPushButton" name="btnDivide">
+        <property name="minimumSize">
+         <size>
+          <width>70</width>
+          <height>60</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>÷</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QPushButton" name="btnNum7">
+        <property name="minimumSize">
+         <size>
+          <width>70</width>
+          <height>60</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>7</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QPushButton" name="btnNum8">
+        <property name="minimumSize">
+         <size>
+          <width>70</width>
+          <height>60</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>8</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="2">
+       <widget class="QPushButton" name="btnNum9">
+        <property name="minimumSize">
+         <size>
+          <width>70</width>
+          <height>60</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>9</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="3">
+       <widget class="QPushButton" name="btnMultiple">
+        <property name="minimumSize">
+         <size>
+          <width>70</width>
+          <height>60</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>×</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="0">
+       <widget class="QPushButton" name="btnNum4">
+        <property name="minimumSize">
+         <size>
+          <width>70</width>
+          <height>60</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>4</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="1">
+       <widget class="QPushButton" name="btnNum5">
+        <property name="minimumSize">
+         <size>
+          <width>70</width>
+          <height>60</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>5</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="2">
+       <widget class="QPushButton" name="btnNum6">
+        <property name="minimumSize">
+         <size>
+          <width>70</width>
+          <height>60</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>6</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="3">
+       <widget class="QPushButton" name="btnMinus">
+        <property name="minimumSize">
+         <size>
+          <width>70</width>
+          <height>60</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>-</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="0">
+       <widget class="QPushButton" name="btnNum1">
+        <property name="minimumSize">
+         <size>
+          <width>70</width>
+          <height>60</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>1</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="1">
+       <widget class="QPushButton" name="btnNum2">
+        <property name="minimumSize">
+         <size>
+          <width>70</width>
+          <height>60</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>2</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="2">
+       <widget class="QPushButton" name="btnNum3">
+        <property name="minimumSize">
+         <size>
+          <width>70</width>
+          <height>60</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>3</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="3">
+       <widget class="QPushButton" name="btnPlus">
+        <property name="minimumSize">
+         <size>
+          <width>70</width>
+          <height>60</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>+</string>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="0">
+       <widget class="QPushButton" name="btnSign">
+        <property name="minimumSize">
+         <size>
+          <width>70</width>
+          <height>60</height>
+         </size>
+        </property>
+        <property name="toolTip">
+         <string>正负号</string>
+        </property>
+        <property name="text">
+         <string>±</string>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="1">
+       <widget class="QPushButton" name="btnNum0">
+        <property name="minimumSize">
+         <size>
+          <width>70</width>
+          <height>60</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>0</string>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="2">
+       <widget class="QPushButton" name="btnDot">
+        <property name="minimumSize">
+         <size>
+          <width>70</width>
+          <height>60</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>.</string>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="3">
+       <widget class="QPushButton" name="btnEqual">
+        <property name="minimumSize">
+         <size>
+          <width>70</width>
+          <height>60</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>=</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
