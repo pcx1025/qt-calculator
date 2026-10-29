@@ -211,8 +211,46 @@ void MainWindow::btnSignClicked()
     setDisplay(m_displayText);
 }
 
-// 键盘事件将在下一提交中实现
-// =
+// ======================================================================
+// 键盘事件：数字/小数点走与鼠标共用的 enterDigit/enterDot，
+// 操作符/等号/退格/清除直接触发对应按钮 click()，保证两套输入
+// 复用同一套处理逻辑、行为完全一致
+// ======================================================================
+void MainWindow::keyPressEvent(QKeyEvent *event)
+{
+    int key = event->key();
+
+    // 数字 0~9（主键盘与小键盘，用 event->text() 统一判断）
+    const QString text = event->text();
+    if (text.length() == 1 && text.at(0).isDigit()) {
+        if (m_error) btnClearClicked();
+        enterDigit(text.at(0).digitValue());
+        return;
+    }
+
+    switch (key) {
+    case Qt::Key_Period:
+    case Qt::Key_Comma:
+        if (m_error) btnClearClicked();
+        enterDot();
+        break;
+    case Qt::Key_Plus:      ui->btnPlus->click();     break;
+    case Qt::Key_Minus:     ui->btnMinus->click();    break;
+    case Qt::Key_Asterisk:  ui->btnMultiple->click(); break;
+    case Qt::Key_Slash:     ui->btnDivide->click();   break;
+    case Qt::Key_Enter:
+    case Qt::Key_Return:
+    case Qt::Key_Equal:     ui->btnEqual->click();    break;
+    case Qt::Key_Backspace: ui->btnDel->click();      break;
+    case Qt::Key_Escape:    ui->btnClear->click();    break;
+    case Qt::Key_Delete:    ui->btnCE->click();       break;
+    case Qt::Key_Percent:   ui->btnPercentage->click(); break;
+    default:
+        QMainWindow::keyPressEvent(event);
+    }
+}
+
+// ======================================================================
 // 内部辅助函数
 // ======================================================================
 
