@@ -1,0 +1,10 @@
+release/
+debug/
+*.o
+Makefile*
+.qmake.stash
+ui_mainwindow.h
+video_frames/
+shots/
+gen_report.py
+*.py
