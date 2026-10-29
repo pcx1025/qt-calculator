@@ -254,11 +254,22 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
 // 内部辅助函数
 // ======================================================================
 
-// 更新显示屏
+// 更新显示屏，并根据文本长度自适应字号，避免错误提示被截断
 void MainWindow::setDisplay(const QString &text)
 {
     m_displayText = text;
     ui->display->setText(text);
+
+    QFont font = ui->display->font();
+    int baseSize = 26;   // 默认字号（pt）
+    font.setPointSize(baseSize);
+    QFontMetrics fm(font);
+    while (fm.horizontalAdvance(text) > ui->display->width() - 20 && baseSize > 12) {
+        baseSize -= 2;
+        font.setPointSize(baseSize);
+        fm = QFontMetrics(font);
+    }
+    ui->display->setFont(font);
 }
 
 double MainWindow::displayToDouble() const
